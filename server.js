@@ -8,7 +8,7 @@ app.use(express.json());
 
 const FILE = "data.json";
 
-// Load file data.json atau buat baru
+// Load atau buat file data.json
 let data = {};
 if (fs.existsSync(FILE)) {
   data = JSON.parse(fs.readFileSync(FILE));
