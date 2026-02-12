@@ -8,11 +8,13 @@ app.use(express.json());
 
 const FILE = "data.json";
 
+// Load file data.json atau buat baru
 let data = {};
 if (fs.existsSync(FILE)) {
   data = JSON.parse(fs.readFileSync(FILE));
 }
 
+// Generate username random
 function generateUsername() {
   const adj = ["Blue","Red","Sunny","Crazy","Happy","Swift","Magic"];
   const animal = ["Tiger","Fox","Panda","Wolf","Cat","Lion","Bear"];
@@ -21,17 +23,18 @@ function generateUsername() {
          Math.floor(Math.random()*1000);
 }
 
+// Endpoint untuk username per device
 app.post("/get-username", (req, res) => {
-  const fingerprint = req.body.fingerprint;
-  if (!fingerprint) return res.status(400).json({ error: "No fingerprint" });
+  const deviceId = req.body.fingerprint;
+  if (!deviceId) return res.status(400).json({ error: "No device ID" });
 
-  if (!data[fingerprint]) {
-    data[fingerprint] = generateUsername();
+  if (!data[deviceId]) {
+    data[deviceId] = generateUsername();
     fs.writeFileSync(FILE, JSON.stringify(data, null, 2));
   }
 
-  res.json({ username: data[fingerprint] });
+  res.json({ username: data[deviceId] });
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log("Server running"));
+app.listen(PORT, () => console.log("Server running on port", PORT));
