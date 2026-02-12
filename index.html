@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Random Username via Railway</title>
+<title>Username via Railway</title>
 <style>
   body { font-family: sans-serif; margin: 30px; }
   #username { font-weight: bold; color: #2a9d8f; }
@@ -13,6 +13,7 @@
 <p>Your username: <span id="username">Loading...</span></p>
 
 <script>
+// Device ID tetap di localStorage
 function getDeviceId() {
   let deviceId = localStorage.getItem("device_id");
   if (!deviceId) {
@@ -22,6 +23,7 @@ function getDeviceId() {
   return deviceId;
 }
 
+// Ambil username dari server
 async function initUser() {
   let username = localStorage.getItem('username');
   if (!username) {
