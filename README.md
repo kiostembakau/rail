@@ -1,10 +1,12 @@
-# Username Server
+# Username Railway
 
-Simple Node.js + Express server untuk generate username per device.
+Simple Node.js server + HTML client untuk generate **1 username per device**.  
 Siap deploy ke Railway.
 
-## API Endpoint
+## Cara Deploy
 
-POST /get-username
-- body JSON: { "fingerprint": "device fingerprint string" }
-- response JSON: { "username": "generated username" }
+1. Fork atau clone repo ini
+2. Login ke Railway → New Project → Deploy from GitHub → Pilih repo
+3. Tunggu deploy selesai → dapat URL misal `https://rail-production-4866.up.railway.app`
+4. Ganti `<RAILWAY_URL>` di `index.html` dengan URL mu
+5. Buka `index.html` → username muncul otomatis
