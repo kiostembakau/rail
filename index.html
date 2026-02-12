@@ -27,7 +27,7 @@ async function initUser() {
   if (!username) {
     const deviceId = getDeviceId();
     try {
-      const res = await fetch('https://<RAILWAY_URL>/get-username', {
+      const res = await fetch('https://rail-production-4866.up.railway.app/get-username', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ fingerprint: deviceId })
