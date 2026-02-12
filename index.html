@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Random Username via Railway</title>
+<style>
+  body { font-family: sans-serif; margin: 30px; }
+  #username { font-weight: bold; color: #2a9d8f; }
+</style>
+</head>
+<body>
+<h1>Welcome!</h1>
+<p>Your username: <span id="username">Loading...</span></p>
+
+<script>
+function getDeviceId() {
+  let deviceId = localStorage.getItem("device_id");
+  if (!deviceId) {
+    deviceId = 'dev-' + Math.floor(Math.random()*1e12);
+    localStorage.setItem("device_id", deviceId);
+  }
+  return deviceId;
+}
+
+async function initUser() {
+  let username = localStorage.getItem('username');
+  if (!username) {
+    const deviceId = getDeviceId();
+    try {
+      const res = await fetch('https://<RAILWAY_URL>/get-username', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ fingerprint: deviceId })
+      });
+      const data = await res.json();
+      username = data.username;
+      localStorage.setItem('username', username);
+    } catch(err) {
+      console.error(err);
+      username = 'User' + Math.floor(Math.random()*1000000);
+    }
+  }
+  document.getElementById('username').textContent = username;
+}
+
+initUser();
+</script>
+</body>
+</html>
