@@ -13,21 +13,17 @@
 <p>Your username: <span id="username">Loading...</span></p>
 
 <script>
-// Device ID tetap di localStorage
-function getDeviceId() {
-  let deviceId = localStorage.getItem("device_id");
-  if (!deviceId) {
-    deviceId = 'dev-' + Math.floor(Math.random()*1e12);
-    localStorage.setItem("device_id", deviceId);
-  }
-  return deviceId;
+// Device ID stabil per browser
+let deviceId = localStorage.getItem("device_id");
+if (!deviceId) {
+  deviceId = 'dev-' + Math.floor(Math.random()*1e12);
+  localStorage.setItem("device_id", deviceId);
 }
 
-// Ambil username dari server
+// Fetch username dari server
 async function initUser() {
   let username = localStorage.getItem('username');
   if (!username) {
-    const deviceId = getDeviceId();
     try {
       const res = await fetch('https://rail-production-4866.up.railway.app/get-username', {
         method: 'POST',
