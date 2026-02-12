@@ -1,7 +1,7 @@
 {
-  "name": "username-server",
+  "name": "username-railway",
   "version": "1.0.0",
-  "description": "Random username server for Railway deployment",
+  "description": "Random username per device via Railway",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
